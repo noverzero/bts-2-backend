@@ -11,25 +11,25 @@
 // table.timestamps(true, true)
 
 
-const {util, seed} = require('data-seed')
+const { util, seed } = require('data-seed')
 const fullNameSeed = () => { return `${seed.name.en.firstName()} ${seed.name.en.lastName()}` }
 const firstNameSeed = () => { return seed.name.en.firstName() }
 const lastNameSeed = () => { return seed.name.en.lastName() }
 const seedEmail = () => { return seed.email() }
-const randomFromArraySeed = (arr) => { return  arr[Math.floor(Math.random() * arr.length)] }
-const random10digits = () => { return util.random.int(1,10)}
+const randomFromArraySeed = (arr) => { return arr[Math.floor(Math.random() * arr.length)] }
+const random10digits = () => { return util.random.int(1, 10) }
 
 const generateOrdersSeeds = (num) => {
   let orders = []
   for (let i = 0; i < num; i++) {
-      orders.push(
-        {
-          pickupLocationId: randomFromArraySeed([1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 6]),
-          eventId: randomFromArraySeed([1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 8, 8]),
-          reservationId: random10digits(),
-          reservationWillCallName: fullNameSeed(),
-        }
-      )
+    orders.push(
+      {
+        pickupLocationId: randomFromArraySeed([1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 6]),
+        eventId: randomFromArraySeed([1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 8, 8]),
+        reservationId: random10digits(),
+        reservationWillCallName: fullNameSeed(),
+      }
+    )
   }
   return orders
 }

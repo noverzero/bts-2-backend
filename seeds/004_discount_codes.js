@@ -13,31 +13,31 @@
 // table.string("type").defaultTo("standard")
 // table.timestamps(true,true)
 
-const {util, seed} = require('data-seed')
+const { util, seed } = require('data-seed')
 const discountCodeSeed = (length) => {
-    let chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890"
-    let pass = ""
-    for (var x = 0; x < length; x++) {
-        var i = Math.floor(Math.random() * chars.length)
-        pass += chars.charAt(i)
-    }
-    return pass
+  let chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890"
+  let pass = ""
+  for (var x = 0; x < length; x++) {
+    var i = Math.floor(Math.random() * chars.length)
+    pass += chars.charAt(i)
+  }
+  return pass
 }
 
 const fullNameSeed = () => { return `${seed.name.en.firstName()} ${seed.name.en.lastName()}` }
 const seedEmail = () => { return seed.email() }
-const randomFromArraySeed = (arr) => { return  arr[Math.floor(Math.random() * arr.length)] }
+const randomFromArraySeed = (arr) => { return arr[Math.floor(Math.random() * arr.length)] }
 
 const generateDiscount_CodeSeeds = (num) => {
   let discountCodes = []
   for (let i = 0; i < num; i++) {
-      discountCodes.push(
-        {
-          issuedTo: seedEmail(),
-          discountCode: discountCodeSeed(10),
-          percentage: randomFromArraySeed([100, 50, 20, 20, 20, 20, 20, 20, 10, 10, 10, 10]),
-          eventId: randomFromArraySeed([1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 9])
-        })
+    discountCodes.push(
+      {
+        issuedTo: seedEmail(),
+        discountCode: discountCodeSeed(10),
+        percentage: randomFromArraySeed([100, 50, 20, 20, 20, 20, 20, 20, 10, 10, 10, 10]),
+        eventId: randomFromArraySeed([1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 9])
+      })
   }
   return discountCodes
 }

@@ -1,15 +1,15 @@
-const {util, seed} = require('data-seed')
+const { util, seed } = require('data-seed')
 const firstNameSeed = () => { return seed.name.en.firstName() }
 const lastNameSeed = () => { return seed.name.en.lastName() }
 const seedEmail = () => { return seed.email() }
-const preferredLocationSeed = (arr) => { return  arr[Math.floor(Math.random() * arr.length)] }
+const preferredLocationSeed = (arr) => { return arr[Math.floor(Math.random() * arr.length)] }
 
 const generateUsersSeeds = (num) => {
   let users = []
   for (let i = 0; i < num; i++) {
-      users.push(
-        {firstName: firstNameSeed(), lastName: lastNameSeed(), email: seedEmail(), preferredLocation: preferredLocationSeed(['Denver', 'Boulder', 'Fort Collins', 'Longmont', ''])}
-      )
+    users.push(
+      { firstName: firstNameSeed(), lastName: lastNameSeed(), email: seedEmail(), preferredLocation: preferredLocationSeed(['Denver', 'Boulder', 'Fort Collins', 'Longmont', '']) }
+    )
   }
   return users
 }

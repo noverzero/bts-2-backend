@@ -1,12 +1,13 @@
 
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('events').del()
     .then(function () {
       // Inserts seed entries
       return knex('events').insert([
-        { id: 1,
+        {
+          id: 1,
           date: '08/08/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -21,7 +22,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 2,
+        {
+          id: 2,
           date: '08/09/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -36,7 +38,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 3,
+        {
+          id: 3,
           date: '08/10/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -51,7 +54,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 4,
+        {
+          id: 4,
           date: '08/11/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -66,7 +70,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 5,
+        {
+          id: 5,
           date: '08/12/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -81,7 +86,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 6,
+        {
+          id: 6,
           date: '08/13/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -96,7 +102,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 7,
+        {
+          id: 7,
           date: '08/14/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -111,7 +118,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 8,
+        {
+          id: 8,
           date: '08/15/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -126,7 +134,8 @@ exports.seed = function(knex, Promise) {
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
         },
-        { id: 9,
+        {
+          id: 9,
           date: '08/16/2019',
           startTime: '19:00',
           venue: 'Red Rocks',
@@ -142,8 +151,8 @@ exports.seed = function(knex, Promise) {
           updated_at: '2016-06-26T14:26:16.000Z',
         }
       ])
-      .then(() => {
-        return knex.raw("SELECT setval('events_id_seq', (SELECT MAX(id) FROM events))")
-      })
+        .then(() => {
+          return knex.raw("SELECT setval('events_id_seq', (SELECT MAX(id) FROM events))")
+        })
     })
 }

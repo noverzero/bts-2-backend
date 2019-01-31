@@ -15,25 +15,25 @@
 // table.integer('capacity').notNullable().defaultTo(44)
 // table.timestamps(true, true)
 
-const {util, seed} = require('data-seed')
+const { util, seed } = require('data-seed')
 const fullNameSeed = () => { return `${seed.name.en.firstName()} ${seed.name.en.lastName()}` }
-const randomFromArraySeed = (arr) => { return  arr[Math.floor(Math.random() * arr.length)] }
-const random10digits = () => { return util.random.int(1,10)}
+const randomFromArraySeed = (arr) => { return arr[Math.floor(Math.random() * arr.length)] }
+const random10digits = () => { return util.random.int(1, 10) }
 const generatePartiesSeeds = (num) => {
   let parties = []
   for (let i = 0; i < num; i++) {
-      parties.push(
-        {
-          pickupLocationId: randomFromArraySeed([1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 6, 7]),
-          eventId: randomFromArraySeed([1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 9]),
-          eventDate: '2019-04-20',
-          eventVenue: 'Red Rocks',
-          lastBusDeparts: 1620,
-          orderId: random10digits(),
-          ordersReservationId: random10digits(),
-          ordersWillCallName: fullNameSeed(),
-        }
-      )
+    parties.push(
+      {
+        pickupLocationId: randomFromArraySeed([1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 5, 5, 6, 7]),
+        eventId: randomFromArraySeed([1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 9]),
+        eventDate: '2019-04-20',
+        eventVenue: 'Red Rocks',
+        lastBusDeparts: 1620,
+        orderId: random10digits(),
+        ordersReservationId: random10digits(),
+        ordersWillCallName: fullNameSeed(),
+      }
+    )
   }
   return parties
 }

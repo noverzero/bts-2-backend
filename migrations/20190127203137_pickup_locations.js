@@ -1,6 +1,6 @@
 
 exports.up = (knex, Promise) => {
-  return knex.schema.createTable("pickup_locations",(table)=>{
+  return knex.schema.createTable("pickup_locations", (table) => {
     table.increments('id')
     table.text("streetAddress").notNullable()
     table.text("city").notNullable()
@@ -9,7 +9,7 @@ exports.up = (knex, Promise) => {
     table.float("longitude").defaultTo()
     table.float("basePrice").defaultTo(25.00)
     table.string("type").defaultTo("standard")
-    table.timestamps(true,true)
+    table.timestamps(true, true)
   })
 }
 
