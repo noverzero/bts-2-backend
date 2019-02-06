@@ -81,6 +81,7 @@ router.patch('/:discountCode', function(req, res, next) {
   }
 
   knex('discount_codes')
+
     .join('discount_codes_events', 'discount_codes.id', 'discount_codes_events.discountCodeId')
     .join('events', 'discount_codes_events.eventsId', 'events.id')
     .select('discountCode', 'percentage', 'expiresOn', 'eventsId', 'remainingUses')

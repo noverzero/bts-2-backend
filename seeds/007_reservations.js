@@ -28,35 +28,35 @@ exports.seed = (knex) => {
     .then(() => {
       // Inserts seed entries
       return knex('reservations').insert(
-        [
-          {
-            id:1,
-            orderId:1,
-            pickupPartiesId:1,
-            willCallFirstName:"James",
-            willCallLastName:"Hetfield",
-            status:1,
-            discountCodeId:1
-          },
-          {
-            id:2,
-            orderId:2,
-            pickupPartiesId:2,
-            willCallFirstName:"Kobe",
-            willCallLastName:"Bryant",
-            status:1,
-            discountCodeId:2
-          },
-          {
-            id:3,
-            orderId:3,
-            pickupPartiesId:3,
-            willCallFirstName:"Barack",
-            willCallLastName:"Obama",
-            status:1,
-            discountCodeId:3
-          }
-        ]
+        // [
+        //   {
+        //     id:1,
+        //     orderId:1,
+        //     pickupPartiesId:1,
+        //     willCallFirstName:"James",
+        //     willCallLastName:"Hetfield",
+        //     status:1,
+        //     discountCodeId:1
+        //   },
+        //   {
+        //     id:2,
+        //     orderId:2,
+        //     pickupPartiesId:2,
+        //     willCallFirstName:"Kobe",
+        //     willCallLastName:"Bryant",
+        //     status:1,
+        //     discountCodeId:2
+        //   },
+        //   {
+        //     id:3,
+        //     orderId:3,
+        //     pickupPartiesId:3,
+        //     willCallFirstName:"Barack",
+        //     willCallLastName:"Obama",
+        //     status:1,
+        //     discountCodeId:3
+        //   }
+        // ]
       )
     })
     .then(() => {

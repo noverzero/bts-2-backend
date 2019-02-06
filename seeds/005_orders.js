@@ -42,39 +42,39 @@ exports.seed = (knex) => {
     .then(() => {
       // Inserts seed entries
       return knex('orders').insert(
-        [
-          {
-          id:1,
-          orderedByFirstName:"Phillip",
-          orderedByLastName:"Borgenicht",
-          orderedByEmail:"pborgenicht@gmail.com",
-        },
-        {
-        id:2,
-        orderedByFirstName:"Dustin",
-        orderedByLastName:"Huth",
-        orderedByEmail:"dhuth@gmail.com",
-        },
-        {
-        id:3,
-        orderedByFirstName:"Seth",
-        orderedByLastName:"Brown",
-        orderedByEmail:"sbrown@gmail.com",
-        },
-        {
-        id:4,
-        orderedByFirstName:"Kevin",
-        orderedByLastName:"Ziechmann",
-        orderedByEmail:"kziechmann@gmail.com",
-      },
-      {
-      id:5,
-      orderedByFirstName:"Jake",
-      orderedByLastName:"Mosher",
-      orderedByEmail:"jmosher@gmail.com",
-      }
+      //   [
+      //     {
+      //     id:1,
+      //     orderedByFirstName:"Phillip",
+      //     orderedByLastName:"Borgenicht",
+      //     orderedByEmail:"pborgenicht@gmail.com",
+      //   },
+      //   {
+      //   id:2,
+      //   orderedByFirstName:"Dustin",
+      //   orderedByLastName:"Huth",
+      //   orderedByEmail:"dhuth@gmail.com",
+      //   },
+      //   {
+      //   id:3,
+      //   orderedByFirstName:"Seth",
+      //   orderedByLastName:"Brown",
+      //   orderedByEmail:"sbrown@gmail.com",
+      //   },
+      //   {
+      //   id:4,
+      //   orderedByFirstName:"Kevin",
+      //   orderedByLastName:"Ziechmann",
+      //   orderedByEmail:"kziechmann@gmail.com",
+      // },
+      // {
+      // id:5,
+      // orderedByFirstName:"Jake",
+      // orderedByLastName:"Mosher",
+      // orderedByEmail:"jmosher@gmail.com",
+      // }
 
-        ]
+      //   ]
       )
     })
     .then(() => {

@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../knex.js')
-var stripeSecretKey = process.env.STRIPE_SECRETKEY;
+// var stripeSecretKey = process.env.STRIPE_SECRETKEY;
+var stripeSecretKey = 'sk_test_UpJeVveXeyBBKiiJUcE4SWm6';
 var stripePublicKey = 'pk_test_J0CdRMCGmBlrlOiGKnGgUEwT'
 const stripe = require('stripe')(stripeSecretKey);
 
@@ -34,10 +35,14 @@ router.post('/', function(req, res, next){
   let newPickupPartyId
   let newOrderId
   const currentEventId=req.body.eventId
-  let userDiscountCode=req.body.discountCode
-  //if(!userDiscountCode){} IF USER DOESN'T ENTER DISCOUNT CODE, PROCEED
+  let userDiscountCode = req.body.discountCode? req.body.discountCode : null
   if(!firstName || !lastName || !email){
-      return next({ status: 400, message: 'Please include first name, last name, and email!'})
+      res.status(404).send('Please include first name, last name, and email!')
+      return null
+  }
+  if(!pickupLocationId || !eventId || !ticketQuantity){
+      res.status(404).send('Please include pickup location, event, and ticket quantity!')
+      return null
   }
   knex('orders')
     .insert({
@@ -47,7 +52,6 @@ router.post('/', function(req, res, next){
     })
     .returning(['id', 'orderedByFirstName', 'orderedByLastName', 'orderedByEmail'])
   .then((newOrder) => {
-    // res.status(200).json(newOrder[0])
     newOrderId=newOrder[0].id
     return newOrderId
   })
@@ -61,23 +65,25 @@ router.post('/', function(req, res, next){
       .returning(['id', 'eventId', 'pickupLocationId', 'inCart', 'capacity'])
     .then((newPickupParty)=>{
       newPickupPartyId=newPickupParty[0].id
-      let newObject=[newOrderId, newPickupPartyId]
-      return (newObject)
+      let newOrdersArr=[newOrderId, newPickupPartyId]
+      return newOrdersArr
     })
-    .then((newObject)=>{
+    .then((ordersArr)=>{
       knex('reservations')
         .insert({
-          orderId: newObject[0],
-          pickupPartiesId: newObject[1],
+          orderId: ordersArr[0],
+          pickupPartiesId: ordersArr[1],
           willCallFirstName: req.body.willCallFirstName,
           willCallLastName: req.body.willCallLastName,
-          // status:,
           discountCodeId: userDiscountCode
           })
         .returning(['id', 'pickupPartiesId', 'willCallFirstName', 'willCallLastName', 'status', 'discountCodeId'])
       .then((newReservation)=>{
         res.status(200).json(newReservation[0])
       })
+    })
+    .catch(err=>{
+      res.status(400).json(err)
     })
   })
 })
@@ -109,15 +115,22 @@ router.post('/charge', async(req, res) => {
     email: req.body.stripeEmail,
     source: req.body.stripeToken.id,
   })
-  .then(customer => stripe.charges.create({
-    amount: req.body.amount,
-    description: 'example charge',
-    currency: 'usd',
-    customer: customer.id
-  }))
-  .then(charge => {console.log(res)
-    return res.json(charge)}
-  );
-});
+  .then(customer =>{ 
+    stripe.charges.create({
+        amount: req.body.amount,
+        description: 'example charge',
+        currency: 'usd',
+        customer: customer.id,
+        receipt_email: customer.email
+      }, (err, charge) => {
+        if (err) {
+          return err
+        }
+        console.log(res)
+        return res.json(charge)
+      }
+    )
+  })
+})
 
 module.exports = router;

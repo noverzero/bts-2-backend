@@ -49,50 +49,51 @@ exports.seed = (knex) => {
     .then(() => {
       // Inserts seed entries
       return knex('discount_codes').insert(
-      [
-        {
-          id: 1,
-          discountCode:"MetallicaConcert",
-          percentage: 40,
-          expiresOn: 20190606,
-          issuedOn:20190101,
-          issuedTo:"MichaelJordan",
-          issuedBy:"DustinHuth",
-          issuedBecause:"Christmas",
-          timesUsed:3,
-          type:1,
-          remainingUses:2,
-          usesPerEvent:3
-        },
-        {
-          id: 2,
-          discountCode:"SnoopDoggWizKhalifa",
-          percentage: 30,
-          expiresOn: 20190420,
-          issuedOn:20190101,
-          issuedTo:"LadyGaga",
-          issuedBy:"DustinHuth",
-          issuedBecause:"ValentinesDay",
-          timesUsed:2,
-          type:1,
-          remainingUses:2,
-          usesPerEvent:3
-        },
-        {
-          id: 3,
-          discountCode:"MichaelJacksonTribute",
-          percentage: 20,
-          expiresOn: 20191231,
-          issuedOn:20190101,
-          issuedTo:"BlakeBollman",
-          issuedBy:"DustinHuth",
-          issuedBecause:"FourthOfJuly",
-          timesUsed:3,
-          type:1,
-          remainingUses:2,
-          usesPerEvent:3
-        }
-      ])
+      // [
+      //   {
+      //     id: 1,
+      //     discountCode:"MetallicaConcert",
+      //     percentage: 40,
+      //     expiresOn: 20190606,
+      //     issuedOn:20190101,
+      //     issuedTo:"MichaelJordan",
+      //     issuedBy:"DustinHuth",
+      //     issuedBecause:"Christmas",
+      //     timesUsed:3,
+      //     type:1,
+      //     remainingUses:2,
+      //     usesPerEvent:3
+      //   },
+      //   {
+      //     id: 2,
+      //     discountCode:"SnoopDoggWizKhalifa",
+      //     percentage: 30,
+      //     expiresOn: 20190420,
+      //     issuedOn:20190101,
+      //     issuedTo:"LadyGaga",
+      //     issuedBy:"DustinHuth",
+      //     issuedBecause:"ValentinesDay",
+      //     timesUsed:2,
+      //     type:1,
+      //     remainingUses:2,
+      //     usesPerEvent:3
+      //   },
+      //   {
+      //     id: 3,
+      //     discountCode:"MichaelJacksonTribute",
+      //     percentage: 20,
+      //     expiresOn: 20191231,
+      //     issuedOn:20190101,
+      //     issuedTo:"BlakeBollman",
+      //     issuedBy:"DustinHuth",
+      //     issuedBecause:"FourthOfJuly",
+      //     timesUsed:3,
+      //     type:1,
+      //     remainingUses:2,
+      //     usesPerEvent:3
+      //   }
+      // ]
+      )
     })
     .then(() => {
       return knex.raw("SELECT setval('discount_codes_id_seq', (SELECT MAX(id) FROM discount_codes))")

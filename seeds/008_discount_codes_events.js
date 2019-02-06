@@ -26,23 +26,23 @@ exports.seed = (knex) => {
     .then(() => {
       // Inserts seed entries
       return knex('discount_codes_events').insert(
-        [
-          {
-            id:1,
-            eventsId:2,
-            discountCodeId:1
-          },
-          {
-            id:2,
-            eventsId:3,
-            discountCodeId:2
-          },
-          {
-            id:3,
-            eventsId:4,
-            discountCodeId:3
-          }
-        ]
+        // [
+        //   {
+        //     id:1,
+        //     eventsId:2,
+        //     discountCodeId:1
+        //   },
+        //   {
+        //     id:2,
+        //     eventsId:3,
+        //     discountCodeId:2
+        //   },
+        //   {
+        //     id:3,
+        //     eventsId:4,
+        //     discountCodeId:3
+        //   }
+        // ]
       )
     })
     .then(() => {
