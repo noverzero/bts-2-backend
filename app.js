@@ -21,6 +21,7 @@ var ordersRouter = require('./routes/orders');
 var pickupLocationsRouter = require('./routes/pickup_locations');
 var pickupPartiesRouter = require('./routes/pickup_parties');
 var eventDataHandler = require('./eventDataHandler')
+var usersRouter = require('./routes/users')
 var app = express();
 
 var reservationsRouter = require('./routes/reservations')
@@ -42,6 +43,7 @@ app.use('/discount_codes_events', discountCodesEventsRouter);
 app.use('/discount_codes', discountCodesRouter);
 app.use('/events', eventsRouter);
 app.use('/orders', ordersRouter);
+app.use('/users', usersRouter);
 app.use('/pickup_locations', pickupLocationsRouter);
 app.use('/pickup_parties', pickupPartiesRouter);
 app.use('/reservations', reservationsRouter);
