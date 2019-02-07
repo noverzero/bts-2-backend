@@ -4,7 +4,7 @@ exports.up = (knex, Promise) => {
     table.integer('userId')
     table.foreign('userId').references('users.id')
     table.integer('reservationId')
-    table.foreign('discountCodeId').references('reservations.id')
+    table.foreign('reservationId').references('reservations.id')
   })
 }
 
