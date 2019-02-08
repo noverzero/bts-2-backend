@@ -49,12 +49,12 @@ router.post('/', function(req, res, next){
                     preferredLocation: "",
                 })
       .returning('*')
-      .then((data) => {
-        res.status(200).json(data[0])
+      .then((newUser) => {
+        res.status(200).send(JSON.stringify(newUser[0]))
       })
     } else {
-      console.log('logged in via FaceBOOOOK')
-      res.status(200).send('Logged in.')
+      console.log(userExists)
+      res.status(200).send(JSON.stringify(userExist[0]))
     }
     }
     )

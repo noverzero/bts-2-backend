@@ -86,7 +86,7 @@ router.post('/', function (req, res, next) {
                   willCallLastName: req.body.willCallLastName,
                   discountCodeId: userDiscountCode
                 })
-                .returning(['id', 'pickupPartiesId', 'willCallFirstName', 'willCallLastName', 'status', 'discountCodeId'])
+                .returning(['*'])
                 .then((newReservation) => {
                   res.status(200).json(newReservation[0])
                 })
