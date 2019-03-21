@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 //Get All reservations associated with a userId (passed in as req.params.id)
 router.get('/:id', function(req, res, next){
   knex('orders')
-  .select('orderedByFirstName', 'orderedByLastName', 'orderedByEmail', 'userId', 'orderId', 'willCallFirstName', 'willCallLastName', 'status', 'lastBusDepartureTime', 'firstBusLoadTime', 'city', 'locationName', 'streetAddress', 'date', 'venue', 'headliner', 'support1', 'support2', 'support3', 'headlinerBio', 'headlinerImgLink' )
+  .select('orderedByFirstName', 'orderedByLastName', 'orderedByEmail', 'userId', 'orderId', 'willCallFirstName', 'willCallLastName', 'reservations.id', 'status', 'lastBusDepartureTime', 'firstBusLoadTime', 'city', 'locationName', 'streetAddress', 'date', 'venue', 'headliner', 'support1', 'support2', 'support3', 'headlinerBio', 'headlinerImgLink' )
   .join('reservations', 'orders.id', '=', 'reservations.orderId')
   .join('pickup_parties', 'reservations.pickupPartiesId', '=', 'pickup_parties.id')
   .join('pickup_locations', 'pickup_locations.id', '=', 'pickup_parties.pickupLocationId')
