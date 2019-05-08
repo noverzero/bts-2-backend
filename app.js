@@ -18,7 +18,8 @@ var eventsRouter = require('./routes/events');
 var ordersRouter = require('./routes/orders');
 var pickupLocationsRouter = require('./routes/pickup_locations');
 var pickupPartiesRouter = require('./routes/pickup_parties');
-var eventDataHandler = require('./eventDataHandler')
+// var eventDataHandler = require('./eventDataHandler')
+var { getApiData, insertEventData } = require('./eventDataHandler')
 var reservationsRouter = require('./routes/reservations')
 var usersRouter = require('./routes/users')
 var app = express();
@@ -54,11 +55,13 @@ app.use(function(req, res) {
 });
 
 apiDataFunction = async () => {
-  const allShowsObj = await eventDataHandler.getApiData()
-  eventDataHandler.insertEventData(allShowsObj)
+  // const allShowsObj = await eventDataHandler.getApiData()
+  const allShowsObj = await getApiData()
+  // eventDataHandler.insertEventData(allShowsObj)
+  insertEventData(allShowsObj)
 }
 
-apiDataFunction() // commented out until we go live
+apiDataFunction()
 
 // let time = new Date()
 cron.schedule('00 04 * * * *', async () => {
