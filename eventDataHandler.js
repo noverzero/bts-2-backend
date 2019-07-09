@@ -23,6 +23,86 @@ const sweepInCarts = () => {
 //sweepInCarts()
 // make the api call to last.fm
 
+const updateAllDepartureTimes = () => {
+  console.log('updateAllDepartureTimes() fired')
+  startDate = new Date('06/30/2019')
+  knex('events')
+  .where('venue', 'Red Rocks Amphitheatre')
+  .select('id', 'date', 'startTime', 'venue')
+  .then(result => {
+    result.map((event) => {
+      let startTimeArr = event.startTime.split(':')
+      let timeValue = ~~startTimeArr[0] + ~~startTimeArr[1]/60
+      //console.log('startTime split', timeValue)
+      let dateString = event.date
+      let newDate = new Date(dateString)
+      let dayOfWeek =  newDate.getDay()
+      //console.log(event.date, event.venue)
+      if (newDate > startDate) {
+        //weekday and show time is between 5:30 7:30
+        if ((0 < dayOfWeek) && (dayOfWeek < 5)){
+          if (timeValue <= 16){
+            console.log('weekday and before 4:00', event.startTime, dayOfWeek)
+            knex('pickup_parties')
+            .select('*')
+            .where('eventId', '=', event.id)
+            .then(result =>{
+
+              let partyTimeObj = {
+                  1: null,
+                  2: null,
+                  3: event.startTime - 90,
+                  4: null,
+                  5: event.startTime - 75,
+                  6: null,
+                  7: null,
+                  8: null,
+                  9: null,
+                  10: null,
+                  11: '17:30',
+                  12: '17:00',
+                  13: '16:30',
+                  14: '16:45',
+                  15: '17:00',
+                  16: '16:45',
+                  17: '15:30',
+                  18: null,
+                  19: '16:30',
+              }
+
+//console.log('partyTimeObj.15', partyTimeObj.15)
+              // locationIdsArr.map(location =>{
+              //   if(!result.filter(party => party.pickupLocationId === location)[0]){
+              //     console.log('fire post route to add appropriate details for this location:', location)
+              //   }
+              //
+              // })
+              result.map(party => {
+                console.log('pickupParties: ', party.id, party.eventId, party.lastBusDepartureTime, party.post)
+              })
+            })
+          }
+        } else if ((dayOfWeek === 0) || (dayOfWeek >= 5)){
+          if (timeValue < 19.5){
+            console.log('weekend and before 7:30', event.startTime, dayOfWeek)
+            knex('pickup_parties')
+            .select('*')
+            .where('eventId', '=', event.id)
+            .then(result =>{
+              result.map(party => {
+                console.log('pickupParties: ', party.id, party.eventId, party.lastBusDepartureTime)
+              })
+            })
+          }
+        }
+      }
+    })
+  })
+}
+
+
+updateAllDepartureTimes()
+
 // make the api call to songkick
 const getApiData = async () => {
   try {
@@ -163,7 +243,7 @@ const insertEventData = (allShowsObj) => {
     })
 }
 // math from "hh:mm:ss" to minutes as a number
-const convertTimeToMinutes = (time = 0) => {
+const convertTimeToMinutes = (time) => {
   let newTime = time.split(':')
   newTime = parseInt(newTime[0])*60+parseInt(newTime[1])
   return newTime
@@ -273,7 +353,6 @@ const addSouthDock = (alreadyThereArr) => {
        .insert(dryDockParties).returning('*').then(result=>{console.log('added dryDockParties', result.length || 0)})
 
    })
-
 
 
 }
