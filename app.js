@@ -19,6 +19,8 @@ var pickupPartiesRouter = require('./routes/pickup_parties');
 var eventDataHandler = require('./eventDataHandler')
 var app = express();
 
+var axios = require('axios')
+
 var reservationsRouter = require('./routes/reservations')
 
 app.use(function(req, res, next) {
@@ -58,5 +60,6 @@ cron.schedule('00 04 * * * *', async () => {
   // console.log('Cron!', time.getMinutes())
   apiDataFunction()
 })
+
 
 module.exports = app;
